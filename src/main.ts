@@ -27,7 +27,7 @@ let saveCnt: number = startCnt;
 
 console.log('filename : ' + filename + ', fileLength : ' + fileLength);
 
-async function changeImageData(index: number, brightType: number = 0) {
+async function changeImageData(index: number, brightType: number = 0): Promise<void> {
     return new Promise(async (resolve, reject) => {
         let loadFilename: string = filename + ` (${index}).${extname}`;
         let saveFilename: string = filename + ` (${saveCnt++}).${extname}`;
@@ -38,8 +38,8 @@ async function changeImageData(index: number, brightType: number = 0) {
                 reject(err);
             }
 
-            let brightness: number = -0.1;
             if (brightType !== 0) {
+                let brightness: number = -0.2;
                 if (brightType === 1) {
                     brightness = 0.4;
                 }
@@ -76,10 +76,10 @@ async function main() {
             await changeImageData(i, 1);
             console.log(`Image Processing (Bright Up) Finish(${i + 1}/${fileLength})`);
         }
-        // for (let i = 0; i < fileLength; i++) {
-        //     await changeImageData(i, false);
-        //     console.log(`Image Processing (Bright Down) Finish(${i + 1}/${fileLength})`);
-        // }
+        for (let i = 0; i < fileLength; i++) {
+            await changeImageData(i, -1);
+            console.log(`Image Processing (Bright Down) Finish(${i + 1}/${fileLength})`);
+        }
     } catch (ex) {
         console.error(ex);
         process.exit(0);
