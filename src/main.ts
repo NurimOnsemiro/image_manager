@@ -69,15 +69,15 @@ async function main() {
     try {
         await mkdirp('./result');
         for (let i = 0; i < fileLength; i++) {
-            await changeImageData(i, 0);
+            await changeImageData(startCnt + i, 0);
             console.log(`Image Processing (Original) Finish(${i + 1}/${fileLength})`);
         }
         for (let i = 0; i < fileLength; i++) {
-            await changeImageData(i, 1);
+            await changeImageData(startCnt + i, 1);
             console.log(`Image Processing (Bright Up) Finish(${i + 1}/${fileLength})`);
         }
         for (let i = 0; i < fileLength; i++) {
-            await changeImageData(i, -1);
+            await changeImageData(startCnt + i, -1);
             console.log(`Image Processing (Bright Down) Finish(${i + 1}/${fileLength})`);
         }
     } catch (ex) {
